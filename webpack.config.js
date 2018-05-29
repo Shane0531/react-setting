@@ -1,10 +1,13 @@
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './app/js/components/App.js',
+  entry: {
+    app: './app/js/components/App.js'
+  },
   output: {
     path: __dirname + '/public/',
-    filename: 'bundle.js'
+    filename: '[name].[chunkhash].js',
+    publicPath: '/public/'
   },
   module: {
     rules: [
@@ -16,5 +19,18 @@ module.exports = {
         }
       }
     ]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './app/index.html',
+      inject: true,
+      filename: 'index.html'
+
+    })
+  ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
   }
 };

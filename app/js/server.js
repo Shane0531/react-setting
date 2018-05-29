@@ -3,9 +3,9 @@ import path from 'path'
 
 const app = express()
 
-app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
-app.set('views', path.join(__dirname, '../'));
+app.set('views', path.join(__dirname, '../../public'));
+app.engine('html', require('ejs').renderFile);
 app.use('/public', express.static(path.join(__dirname, '../../','public')));
 
 app.get('/',function(req,res){
