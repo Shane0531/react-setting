@@ -3,7 +3,15 @@ import path from 'path'
 
 const app = express()
 
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.set('views', path.join(__dirname, '../'));
+app.use('/public', express.static(path.join(__dirname, '../../','public')));
+
+app.get('/',function(req,res){
+  res.render('index.html')
+});
 
 app.listen(8888, () => {
-  console.log('Express is listening on port', port);
+  console.log('Express is listening on port : ', 8888);
 })
